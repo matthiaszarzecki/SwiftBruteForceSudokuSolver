@@ -45,7 +45,19 @@ func isValidAt(value: Int, x: Int, y: Int) -> Bool {
 
     // NO - ONLY CHECK THE SUBGRID THE SPECIFIED SLOT IS ON
 
-    // PUT THIS ON GITHUB FIRST
+    // 0 - 0
+    // 1 - 0
+    // 2 - 0
+    // 3 - 3
+    // 4 - 3
+    // 5 - 3
+    // 6 - 6
+    // 7 - 6
+    // 8 - 6
+
+    // 8 / 3 = 2
+    // 2 x (8/3) + 8 % 3
+
 
     // Check if value is contained in 3x3 grid
     let subGridValues = [
