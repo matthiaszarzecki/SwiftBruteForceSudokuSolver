@@ -26,6 +26,7 @@ func printGrid() {
         }
         print(line)
     }
+    print("-----------------")
 }
 
 /// Returns the start-coordinate for the value
@@ -77,3 +78,24 @@ isValidAt(value: 1, x: 3, y: 3)
 isValidAt(value: 1, x: 1, y: 4)
 
 printGrid()
+var counter = 0
+func solve() {
+    for x in 0..<9 {
+        for y in 0..<9 {
+            if sudokuGrid[x][y] == 0 {
+                for value in 1..<10 {
+                    counter += 1
+                    if isValidAt(value: value, x: x, y: y) {
+                        sudokuGrid[x][y] = value
+                        solve()
+                        sudokuGrid[x][y] = 0
+                    }
+                }
+                return
+            }
+        }
+    }
+    printGrid()
+}
+solve()
+
