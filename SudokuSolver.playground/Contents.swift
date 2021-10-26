@@ -1,5 +1,3 @@
-import UIKit
-
 /// Coordinates:
 ///
 ///   :
@@ -30,6 +28,12 @@ func printGrid() {
     }
 }
 
+/// Returns the start-coordinate for the value
+/// for the subgrid the coordinate is in.
+func getLowerCoordinate(value: Int) -> Int {
+    return (value / 3) * 3
+}
+
 func isValidAt(value: Int, x: Int, y: Int) -> Bool {
     // Check if value is contained in top-to-bottom row
     if sudokuGrid[x].contains(value) {
@@ -43,36 +47,14 @@ func isValidAt(value: Int, x: Int, y: Int) -> Bool {
         }
     }
 
-    // NO - ONLY CHECK THE SUBGRID THE SPECIFIED SLOT IS ON
-
-    // 0 - 0
-    // 1 - 0
-    // 2 - 0
-    // 3 - 3
-    // 4 - 3
-    // 5 - 3
-    // 6 - 6
-    // 7 - 6
-    // 8 - 6
-
-    // 8 / 3 = 2
-    // 2 x (8/3) + 8 % 3
-
-
-    // Check if value is contained in 3x3 grid
-    let subGridValues = [
-        (0, 0), (0, 3), (0, 6),
-        (3, 0), (3, 3), (3, 6),
-        (6, 0), (6, 3), (6, 6),
-    ]
+    let subGridStartX = getLowerCoordinate(value: x)
+    let subGridStartY = getLowerCoordinate(value: y)
     let subGridSize = 3
 
-    for subgrid in subGridValues {
-        for x in subgrid.0..<subgrid.0 + subGridSize {
-            for y in subgrid.1..<subgrid.1 + subGridSize {
-                if sudokuGrid[x][y] == value {
-                    return false
-                }
+    for x in subGridStartX..<subGridStartX + subGridSize {
+        for y in subGridStartY..<subGridStartY + subGridSize {
+            if sudokuGrid[x][y] == value {
+                return false
             }
         }
     }
@@ -81,10 +63,17 @@ func isValidAt(value: Int, x: Int, y: Int) -> Bool {
     return true
 }
 
-sudokuGrid[0][2] = 1
+sudokuGrid[0][0] = 1
 
-isValidAt(value: 1, x: 0, y: 3)
-isValidAt(value: 1, x: 1, y: 2)
+// false
+isValidAt(value: 1, x: 0, y: 0)
+isValidAt(value: 1, x: 1, y: 0)
+isValidAt(value: 1, x: 0, y: 1)
+isValidAt(value: 1, x: 1, y: 1)
+isValidAt(value: 1, x: 2, y: 2)
+
+// true
 isValidAt(value: 1, x: 3, y: 3)
+isValidAt(value: 1, x: 1, y: 4)
 
 printGrid()
