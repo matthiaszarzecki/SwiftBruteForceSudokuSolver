@@ -13,14 +13,16 @@
 var sudokuGrid: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
 
 func printGrid() {
+    var printout = ""
     for y in 0..<9 {
         var line = ""
         for x in 0..<9 {
-            line += "\(sudokuGrid[x][8-y]) "
+            line += "\(sudokuGrid[x][8-y]) " // empty space here on purpose
         }
-        print(line)
+        printout += "\(line) \n"
     }
-    print("-----------------")
+    printout += "-----------------"
+    print(printout)
 }
 
 /// Returns the start-coordinate for the value
