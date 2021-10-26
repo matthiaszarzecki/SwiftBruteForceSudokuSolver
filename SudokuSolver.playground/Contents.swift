@@ -12,12 +12,6 @@
 
 var sudokuGrid: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
 
-for x in 0..<9 {
-    for y in 0..<9 {
-        sudokuGrid[x][y] = 0
-    }
-}
-
 func printGrid() {
     for y in 0..<9 {
         var line = ""
@@ -77,14 +71,11 @@ isValidAt(value: 1, x: 2, y: 2)
 isValidAt(value: 1, x: 3, y: 3)
 isValidAt(value: 1, x: 1, y: 4)
 
-printGrid()
-var counter = 0
 func solve() {
     for x in 0..<9 {
         for y in 0..<9 {
             if sudokuGrid[x][y] == 0 {
                 for value in 1..<10 {
-                    counter += 1
                     if isValidAt(value: value, x: x, y: y) {
                         sudokuGrid[x][y] = value
                         solve()
@@ -97,5 +88,8 @@ func solve() {
     }
     printGrid()
 }
+
 solve()
+
+print("Done")
 
