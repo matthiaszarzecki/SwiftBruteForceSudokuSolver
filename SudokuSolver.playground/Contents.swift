@@ -1,23 +1,24 @@
 /// Coordinates:
-///
-///   :
-/// ↑ 0 0
-/// y 0 0 ..
 ///   x →
+/// y 0 0 ..
+/// ↓ 0 0 ..
+///   : :
 ///
-///               :  :
-///               0  0
-///               0  0
-/// sudokuGrid = [0, 0, ...]
-
+/// sudokuGrid = [
+///   [0, 0, ... ],
+///   [0, 0, ... ],
+///   ...
+/// ]
+///
+///
 var sudokuGrid: [[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
 
 func printGrid() {
     var printout = ""
-    for y in 0..<9 {
+    for x in 0..<9 {
         var line = ""
-        for x in 0..<9 {
-            line += "\(sudokuGrid[x][8-y]) " // empty space here on purpose
+        for y in 0..<9 {
+            line += "\(sudokuGrid[x][y]) " // empty space here on purpose
         }
         printout += "\(line) \n"
     }
@@ -73,6 +74,20 @@ isValidAt(value: 1, x: 2, y: 2)
 isValidAt(value: 1, x: 3, y: 3)
 isValidAt(value: 1, x: 1, y: 4)
 
+sudokuGrid = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
 func solve() {
     for x in 0..<9 {
         for y in 0..<9 {
@@ -88,10 +103,8 @@ func solve() {
             }
         }
     }
+    print("Done")
     printGrid()
 }
 
 solve()
-
-print("Done")
-
